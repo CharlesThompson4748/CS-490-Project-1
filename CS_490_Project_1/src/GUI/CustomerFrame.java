@@ -120,7 +120,8 @@ public class CustomerFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_searchTextFieldActionPerformed
 
     private void rentCarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentCarButtonActionPerformed
-        // TODO add your handling code here:
+        RentalFrame frame=new RentalFrame();
+        frame.setVisible(true);
     }//GEN-LAST:event_rentCarButtonActionPerformed
 
     private void rentedCarsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentedCarsButtonActionPerformed

@@ -18,6 +18,7 @@ public class Controller {
     //Class lists
     private LinkedList<Searchable> customers = new LinkedList<Searchable>();
     private LinkedList<Searchable> cars = new LinkedList<Searchable>();
+    private LinkedList<Searchable> rentals = new  LinkedList<Searchable>();
     
     //Class Constructor
     private Controller(){};
@@ -141,4 +142,5 @@ public class Controller {
         }
         return result;
     }
+    
 }
