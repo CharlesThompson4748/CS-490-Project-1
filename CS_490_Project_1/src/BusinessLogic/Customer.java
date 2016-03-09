@@ -9,7 +9,7 @@ package BusinessLogic;
  *
  * @author charlie
  */
-public class Customer {
+public class Customer implements Searchable{
     private String name;
     private String phone;
     private String address;
@@ -20,10 +20,12 @@ public class Customer {
         this.address = address;
     }
     
-    public String[] customerInfo(String key){
+    @Override
+    public String[] info(){
         return new String[]{this.name, this.phone, this.address};
     }
     
+    @Override
     public boolean contains(String key){
         if(name.trim().toUpperCase().contains(key.trim().toUpperCase()))
             return true;
@@ -35,4 +37,8 @@ public class Customer {
             return false;
     }
     
+    @Override
+    public boolean matches(String key){
+        return this.name.equals(key);
+    }
 }

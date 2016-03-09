@@ -6,6 +6,7 @@
 package BusinessLogic;
 
 import java.util.Calendar;
+
 /**
  *
  * @author charlie
@@ -13,12 +14,14 @@ import java.util.Calendar;
 public class Rental {
     private Calendar rentDate;
     private Calendar returnDate;
-    private enum status {RENTED, RETURNED};
+    private RentalStatus status;
     
-    public Rental(Calendar rentDate, Calendar returnDate, enum status){
-        this.rentDate = rentdate;
+    public Rental(Calendar rentDate, Calendar returnDate, RentalStatus status){
+        this.rentDate = rentDate;
         this.returnDate = returnDate;
         this.status = status;
     }
+    
+    
     
 }
