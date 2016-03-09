@@ -10,11 +10,15 @@ package BusinessLogic;
  * @author charlie
  */
 public class CarSpec {
+    //Class variables
     private String make;
     private String model;
     private int year;
+    
+    //CarSize enum Object
     private CarSize size; 
     
+    //Class Constructor
     public CarSpec(String make, String model, int year, CarSize size){
         this.make = make;
         this.model = model;
@@ -22,6 +26,7 @@ public class CarSpec {
         this.size = size;
     }
     
+    //TODO: Finish this function
     public String[] specInfo (){
         return new String[]{this.make, this.model, Integer.toString(this.year)};
     }

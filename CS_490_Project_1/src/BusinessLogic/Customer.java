@@ -10,21 +10,30 @@ package BusinessLogic;
  * @author charlie
  */
 public class Customer implements Searchable{
+    //Class variables
     private String name;
     private String phone;
     private String address;
     
+    //Class Constructor 
     public Customer(String name, String phone, String address){
         this.name = name;
         this.phone = phone;
         this.address = address;
     }
     
+    //Info function overriden from Searchable interface
+    //Input: None
+    //Output: String Array of Strings containing the current objects
+    //name, phone, and address values
     @Override
     public String[] info(){
         return new String[]{this.name, this.phone, this.address};
     }
     
+    //Contains function overriden from Searchable interface
+    //Input: String containing the value to be compared against
+    //Output: Boolean based on if the any of the value match the input
     @Override
     public boolean contains(String key){
         if(name.trim().toUpperCase().contains(key.trim().toUpperCase()))
@@ -37,6 +46,7 @@ public class Customer implements Searchable{
             return false;
     }
     
+    //Will most likely be removed during refactoring
     @Override
     public boolean matches(String key){
         return this.name.equals(key);

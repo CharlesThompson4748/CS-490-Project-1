@@ -10,13 +10,20 @@ package BusinessLogic;
  * @author charlie
  */
 public class Car implements Searchable{
+    //Class variables
     private String id;
+    
+    //CarSpec class object
     private CarSpec specs;
-            
+    
+    //Class constructor
     public Car(String id){
         this.id = id;
     }
     
+    //Contains function overriden from Searchable interface
+    //Input: String containing the value to be compared against
+    //Output: Boolean based on if the any of the value match the input
     @Override
     public boolean contains(String key){
         if(id.trim().toUpperCase().contains(key.trim().toUpperCase()))
@@ -25,17 +32,25 @@ public class Car implements Searchable{
             return false;
     }
     
+    //Will most likely be removed during refactoring
     @Override
     public boolean matches(String key){
         return this.id.equals(key);
     }
     
+    //Info function overriden from Searchable interface
+    //Input: None
+    //Output: String Array of Strings containing the current objects
+    //name, phone, and address values
     @Override
     public String[] info(){
         return new String[]{this.id};
     }
     
+    //Fucntion to add specs to the current car object
+    //Input: String for make and model, int for year, and CarSize enum object 
     public CarSpec addSpecs(String make, String model, int year, CarSize size){
+        //Create new CarSpec object
         specs = new CarSpec(make, model, year, size);
         return specs;
     }

@@ -50,10 +50,7 @@ public class RentalFrame extends javax.swing.JFrame {
 
         FCTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "Select", "ID", "Make", "Model", "Year", "Size"
@@ -98,10 +95,7 @@ public class RentalFrame extends javax.swing.JFrame {
 
         rentedCarsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Select", "Make", "Model", "Year", "Rented"
@@ -135,10 +129,7 @@ public class RentalFrame extends javax.swing.JFrame {
 
         returnedCarsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Make", "Model", "Year", "Rented", "Returned"

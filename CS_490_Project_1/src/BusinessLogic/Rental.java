@@ -12,16 +12,21 @@ import java.util.Calendar;
  * @author charlie
  */
 public class Rental {
+    //Class variables
     private Calendar rentDate;
     private Calendar returnDate;
+    
+    //RentalStatus enum object
     private RentalStatus status;
     
+    //Class Constructor
     public Rental(Calendar rentDate, Calendar returnDate, RentalStatus status){
         this.rentDate = rentDate;
         this.returnDate = returnDate;
         this.status = status;
     }
     
+    //TODO: Create new functions needed for the class
     
     
 }
