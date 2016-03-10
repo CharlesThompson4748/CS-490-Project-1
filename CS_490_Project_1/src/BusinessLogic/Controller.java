@@ -23,16 +23,17 @@ public class Controller {
     private LinkedList<Searchable> returned = new  LinkedList<Searchable>();
     
     //Class Constructor
-    private Controller(){};
+    private Controller() {}
+
    
     //Function to return the Singleton class object
     //Input: None
     //Output: Class Singleton object
-    public static Controller instance(){
+    public static Controller instance() {
         //Determine if a class object has been created.
-        if(Singleton==null) {
+        if(Singleton == null) {
             //No class object created yet. Create one.
-            Singleton=new Controller();
+            Singleton = new Controller();
         }
         //Return the Singleton class object
         return Singleton;
@@ -41,11 +42,11 @@ public class Controller {
     //Function to convert a String to an RentalStatus enum object
     //Input: String status
     //Ouput: RentalStatus enum object
-    private CarSize getCarSize(String carSize){
+    private CarSize getCarSize(String carSize) {
         //Remove any whitespace
-        String type=carSize.trim();
+        String type = carSize.trim();
         //Compare input to specific values
-        switch(type){
+        switch(type) {
             case "Small":
                 //Return the enum object
                 return CarSize.SMALL;
@@ -62,11 +63,11 @@ public class Controller {
     //Function to convert a String to an RentalStatus enum object
     //Input: String status
     //Ouput: RentalStatus enum object
-    private RentalStatus getRentalStatus(String status){
+    private RentalStatus getRentalStatus(String status) {
         //Remove any whitespace
         String type = status.trim();
         //Compare input to specific values
-        switch(type){
+        switch(type) {
             case "Rented":
                 //Return the enum object
                 return RentalStatus.RENTED;
@@ -81,7 +82,7 @@ public class Controller {
     //Function to create a new Rental object and add to the List of customers
     //Input: TODO
     //Output: Rental object
-    public Rental addRental(RentalStatus status, Calendar rentDate, Calendar returnDate, String customerName, String carID){  
+    public Rental addRental(RentalStatus status, Calendar rentDate, Calendar returnDate, String customerName, String carID) {  
         Rental rental = new Rental(rentDate, returnDate, status);
         return rental;
     }
@@ -89,12 +90,12 @@ public class Controller {
     //Function to create a new Customer object and add to the List of customers
     //Input: Strings for the customer name, phone, and address
     //Output: Customer object
-    public Customer addCustomer(String name, String phone, String address){
+    public Customer addCustomer(String name, String phone, String address) {
         //Convert name to lower (error checking that will be changed)
         try {
             name.toLowerCase();
         }
-        catch (NumberFormatException e){
+        catch (NumberFormatException e) {
             System.out.println("Exception thrown  :" + e);
         }
         
@@ -109,7 +110,7 @@ public class Controller {
     //Input: Strings for the id, make, model, and size of the car as well as
     //an interger for the year
     //Output: Car object
-    public Car addCar(String id, String make, String model, int year, String size){
+    public Car addCar(String id, String make, String model, int year, String size) {
         //Create new Car object
         Car newCar = new Car(id);
         //Convert the size to an enum
@@ -125,11 +126,11 @@ public class Controller {
     //Input: String key for comparison value
     //Output: LinkedList of String arrays of all the values that contained the 
     //input value
-    public LinkedList<String[]> searchCustomers(String key){
+    public LinkedList<String[]> searchCustomers(String key) {
         //Create new list to be returned
-        LinkedList<String[]> result=new LinkedList<String[]>();
+        LinkedList<String[]> result = new LinkedList<String[]>();
         //Search the customers list for strings that contain key 
-        for(Searchable customer:customers){
+        for(Searchable customer:customers) {
             if(customer.contains(key))
                 //Match found adding to list
                 result.add(customer.info());
@@ -141,11 +142,11 @@ public class Controller {
     //Input: String key for comparison value
     //Output: LinkedList of String arrays of all the values that contained the 
     //input value
-    public LinkedList<String[]> searchCars(String key){
+    public LinkedList<String[]> searchCars(String key) {
         //Create new list to be returned
-        LinkedList<String[]> result=new LinkedList<String[]>();
+        LinkedList<String[]> result = new LinkedList<String[]>();
         //Search the cars list for strings that contain key 
-        for(Searchable car:cars){
+        for(Searchable car:cars) {
             if(car.contains(key))
                 //Match found adding to list
                 result.add(car.info());

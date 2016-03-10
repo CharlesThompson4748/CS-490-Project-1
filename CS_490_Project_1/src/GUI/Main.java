@@ -18,7 +18,7 @@ public class Main {
         
         //Adding new cars
         controller.addCar("21575", "Dodge", "Ram 1500", 2008, "Large");
-        controller.addCar("21664", "Dodge", "Dart", 2008, "Small");
+        controller.addCar("21664", "Dodge", "Dart", 2010, "Small");
         controller.addCar("85564", "Ford", "Focus", 2012, "Midsize");
         controller.addCar("85565", "Ford", "Focus", 2013, "Midsize");
         controller.addCar("85566", "Ford", "Mustang", 2015, "Midsize");

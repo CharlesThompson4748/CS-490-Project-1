@@ -28,6 +28,12 @@ public class Car implements Searchable{
     public boolean contains(String key){
         if(id.trim().toUpperCase().contains(key.trim().toUpperCase()))
             return true;
+        else if(this.specs.specInfo()[0].trim().toUpperCase().contains(key.trim().toUpperCase()))
+            return true;
+        else if(this.specs.specInfo()[1].trim().toUpperCase().contains(key.trim().toUpperCase()))
+            return true;
+        else if(this.specs.specInfo()[2].trim().toUpperCase().contains(key.trim().toUpperCase()))
+            return true;
         else 
             return false;
     }
