@@ -44,7 +44,8 @@ public class Car implements Searchable{
     //name, phone, and address values
     @Override
     public String[] info(){
-        return new String[]{this.id};
+        return new String[]{null, this.id, this.specs.specInfo()[0], this.specs.specInfo()[1], this.specs.specInfo()[2],
+            this.specs.specInfo()[3]};
     }
     
     //Fucntion to add specs to the current car object

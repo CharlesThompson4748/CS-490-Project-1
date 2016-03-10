@@ -5,6 +5,7 @@
  */
 package BusinessLogic;
 
+import java.util.Calendar;
 import java.util.LinkedList;
 
 /**
@@ -18,7 +19,8 @@ public class Controller {
     //Class lists
     private LinkedList<Searchable> customers = new LinkedList<Searchable>();
     private LinkedList<Searchable> cars = new LinkedList<Searchable>();
-    private LinkedList<Searchable> rentals = new  LinkedList<Searchable>();
+    private LinkedList<Searchable> rented = new  LinkedList<Searchable>();
+    private LinkedList<Searchable> returned = new  LinkedList<Searchable>();
     
     //Class Constructor
     private Controller(){};
@@ -34,25 +36,6 @@ public class Controller {
         }
         //Return the Singleton class object
         return Singleton;
-    }
-   
-    //Function to create a new Customer object and add to the List of customers
-    //Input: Strings for the customer name, phone, and address
-    //Output: Customer object
-    public Customer addCustomer(String name, String phone, String address){
-        //Convert name to lower (error checking that will be changed)
-        try {
-            name.toLowerCase();
-        }
-        catch (NumberFormatException e){
-            System.out.println("Exception thrown  :" + e);
-        }
-        
-        //Creating new Customer object
-        Customer newCustomer = new Customer(name, phone, address);
-        //Adding new object to customer list
-        customers.add(newCustomer);
-        return newCustomer;
     }
     
     //Function to convert a String to an RentalStatus enum object
@@ -94,7 +77,34 @@ public class Controller {
                 return RentalStatus.RENTED;
         }
     }
-   
+    
+    //Function to create a new Rental object and add to the List of customers
+    //Input: TODO
+    //Output: Rental object
+    public Rental addRental(RentalStatus status, Calendar rentDate, Calendar returnDate, String customerName, String carID){  
+        Rental rental = new Rental(rentDate, returnDate, status);
+        return rental;
+    }
+    
+    //Function to create a new Customer object and add to the List of customers
+    //Input: Strings for the customer name, phone, and address
+    //Output: Customer object
+    public Customer addCustomer(String name, String phone, String address){
+        //Convert name to lower (error checking that will be changed)
+        try {
+            name.toLowerCase();
+        }
+        catch (NumberFormatException e){
+            System.out.println("Exception thrown  :" + e);
+        }
+        
+        //Creating new Customer object
+        Customer newCustomer = new Customer(name, phone, address);
+        //Adding new object to customer list
+        customers.add(newCustomer);
+        return newCustomer;
+    }
+    
     //Function to create a new Car object and add to the List of cars
     //Input: Strings for the id, make, model, and size of the car as well as
     //an interger for the year

@@ -32,7 +32,7 @@ public class Rental implements Searchable{
         this.status = status;
     }
     
-    
+   
     //Info function overriden from Searchable interface
     //Input: None
     //Output: String Array of Strings containing the current objects

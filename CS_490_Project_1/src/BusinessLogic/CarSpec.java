@@ -28,6 +28,6 @@ public class CarSpec {
     
     //TODO: Finish this function
     public String[] specInfo (){
-        return new String[]{this.make, this.model, Integer.toString(this.year)};
+        return new String[]{this.make, this.model, Integer.toString(this.year), this.size.toString()};
     }
 }
