@@ -49,7 +49,7 @@ public class RentalFrame extends javax.swing.JFrame {
         returnedCarsTable = new javax.swing.JTable();
         customerName = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         FCSearchButton.setText("Search");
         FCSearchButton.addActionListener(new java.awt.event.ActionListener() {
@@ -220,7 +220,7 @@ public class RentalFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(customerName)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tabs, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
+                .addComponent(tabs)
                 .addContainerGap())
         );
 
