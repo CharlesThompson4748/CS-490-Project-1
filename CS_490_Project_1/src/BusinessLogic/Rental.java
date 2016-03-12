@@ -42,12 +42,6 @@ public class Rental implements Searchable{
             return false;
     }
     
-    //Will most likely be removed during refactoring
-    @Override
-    public boolean matches(String key){
-        return this.carID.equals(key);
-    }
-    
     //Info function overriden from Searchable interface
     //Input: None
     //Output: String Array of Strings containing the current objects

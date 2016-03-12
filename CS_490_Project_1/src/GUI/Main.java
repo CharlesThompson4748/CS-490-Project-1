@@ -18,18 +18,18 @@ public class Main {
         Controller controller = Controller.instance();
         
         //Adding new cars
-        controller.addCar("21575", "Dodge", "Ram 1500", 2008, "Large");
-        controller.addCar("21664", "Dodge", "Dart", 2010, "Small");
-        controller.addCar("85564", "Ford", "Focus", 2012, "Midsize");
-        controller.addCar("85565", "Ford", "Focus", 2013, "Midsize");
-        controller.addCar("85566", "Ford", "Mustang", 2015, "Midsize");
-        controller.addCar("31789", "Nissan", "Altima", 2012, "Small");
-        controller.addCar("31767", "Nissan", "Altima", 2013, "Small");
-        controller.addCar("11134", "Volks Wagen", "Golf GTI", 2014, "Midsize");
-        controller.addCar("12457", "Volks Wagen", "Passat", 2015, "Large");
-        controller.addCar("56481", "Chevy", "Cruze", 2015, "Midsize");
-        controller.addCar("56794", "Chevy", "Spark", 2014, "Small");
-        controller.addCar("53231", "Chevy", "Tahoe", 2013, "Large");
+        controller.addCar("21575", "Dodge", "Ram 1500", 2008, "Large", "");
+        controller.addCar("21664", "Dodge", "Dart", 2010, "Small", "");
+        controller.addCar("85564", "Ford", "Focus", 2012, "Midsize", "");
+        controller.addCar("85565", "Ford", "Focus", 2013, "Midsize", "");
+        controller.addCar("85566", "Ford", "Mustang", 2015, "Midsize", "");
+        controller.addCar("31789", "Nissan", "Altima", 2012, "Small", "");
+        controller.addCar("31767", "Nissan", "Altima", 2013, "Small", "");
+        controller.addCar("11134", "Volks Wagen", "Golf GTI", 2014, "Midsize", "");
+        controller.addCar("12457", "Volks Wagen", "Passat", 2015, "Large", "");
+        controller.addCar("56481", "Chevy", "Cruze", 2015, "Midsize", "");
+        controller.addCar("56794", "Chevy", "Spark", 2014, "Small", "");
+        controller.addCar("53231", "Chevy", "Tahoe", 2013, "Large", "");
         
         //Adding new customers
         controller.addCustomer("Charles Thompson", "235-985-7811", "411 Antioch Rd.");

@@ -38,12 +38,6 @@ public class Car implements Searchable{
             return false;
     }
     
-    //Will most likely be removed during refactoring
-    @Override
-    public boolean matches(String key){
-        return this.id.equals(key);
-    }
-    
     //Info function overriden from Searchable interface
     //Input: None
     //Output: String Array of Strings containing the current objects
@@ -56,9 +50,9 @@ public class Car implements Searchable{
     
     //Fucntion to add specs to the current car object
     //Input: String for make and model, int for year, and CarSize enum object 
-    public CarSpec addSpecs(String make, String model, int year, CarSize size){
+    public CarSpec addSpecs(String make, String model, int year, CarSize size, RentalStatus status){
         //Create new CarSpec object
-        specs = new CarSpec(make, model, year, size);
+        specs = new CarSpec(make, model, year, size, status);
         return specs;
     }
 }

@@ -45,10 +45,5 @@ public class Customer implements Searchable{
         else 
             return false;
     }
-    
-    //Will most likely be removed during refactoring
-    @Override
-    public boolean matches(String key){
-        return this.name.equals(key);
-    }
+
 }

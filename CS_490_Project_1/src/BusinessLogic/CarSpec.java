@@ -17,13 +17,14 @@ public class CarSpec {
     
     //CarSize enum Object
     private CarSize size; 
-    
+    private RentalStatus status;
     //Class Constructor
-    public CarSpec(String make, String model, int year, CarSize size){
+    public CarSpec(String make, String model, int year, CarSize size, RentalStatus status){
         this.make = make;
         this.model = model;
         this.year = year;
         this.size = size;
+        this.status = status;
     }
     
     //TODO: Finish this function

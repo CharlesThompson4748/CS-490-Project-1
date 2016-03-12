@@ -87,7 +87,7 @@ public class Controller {
                 return RentalStatus.RETURNED;
             //No match found. Default value to enum RENTED
             default:
-                return RentalStatus.RENTED;
+                return RentalStatus.RETURNED;
         }
     }
     
@@ -128,13 +128,15 @@ public class Controller {
     //Input: Strings for the id, make, model, and size of the car as well as
     //an interger for the year
     //Output: Car object
-    public Car addCar(String id, String make, String model, int year, String size) {
+    public Car addCar(String id, String make, String model, int year, String size, String status) {
         //Create new Car object
         Car newCar = new Car(id);
         //Convert the size to an enum
         CarSize sizeFormatted = getCarSize(size);
+        //Convert the rental status to an enum
+        RentalStatus statusFormatted = getRentalStatus(status);
         //Create an object for the car specs
-        newCar.addSpecs(make, model, year, sizeFormatted);
+        newCar.addSpecs(make, model, year, sizeFormatted, statusFormatted);
         //Add the car to the list
         cars.add(newCar);
         return newCar;
