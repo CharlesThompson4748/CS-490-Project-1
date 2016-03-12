@@ -53,7 +53,7 @@ public class Controller {
     public void setCarToRented(String carID, String status){
         for(Searchable car:cars){
             if(car.contains(carID))
-                car.setRentalStatus(getRentalStatus(status));
+                getRentalStatus(status);
         }
     }
     
@@ -134,15 +134,13 @@ public class Controller {
     //Input: Strings for the id, make, model, and size of the car as well as
     //an interger for the year
     //Output: Car object
-    public Car addCar(String id, String make, String model, int year, String size, String status) {
+    public Car addCar(String id, String make, String model, int year, String size) {
         //Create new Car object
         Car newCar = new Car(id);
         //Convert the size to an enum
         CarSize sizeFormatted = getCarSize(size);
-        //Convert the rental status to an enum
-        RentalStatus statusFormatted = getRentalStatus(status);
         //Create an object for the car specs
-        newCar.addSpecs(make, model, year, sizeFormatted, statusFormatted);
+        newCar.addSpecs(make, model, year, sizeFormatted);
         //Add the car to the list
         cars.add(newCar);
         return newCar;
