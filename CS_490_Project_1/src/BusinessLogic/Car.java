@@ -15,8 +15,9 @@ public class Car implements Searchable{
     
     //CarSpec class object
     private CarSpec specs;
-    
+    private RentalStatus status;
     //Class constructor
+    
     public Car(String id){
         this.id = id;
     }
@@ -50,9 +51,13 @@ public class Car implements Searchable{
     
     //Fucntion to add specs to the current car object
     //Input: String for make and model, int for year, and CarSize enum object 
-    public CarSpec addSpecs(String make, String model, int year, CarSize size, RentalStatus status){
+    public CarSpec addSpecs(String make, String model, int year, CarSize size){
         //Create new CarSpec object
-        specs = new CarSpec(make, model, year, size, status);
+        specs = new CarSpec(make, model, year, size);
         return specs;
+    }
+    
+    public void setRentalStatus(RentalStatus status){
+        this.status = status;
     }
 }
