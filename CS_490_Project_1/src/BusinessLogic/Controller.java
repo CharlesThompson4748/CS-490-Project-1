@@ -96,7 +96,6 @@ public class Controller {
     //Output: Rental object
     public Rental addRental(Calendar rentDate, Calendar returnDate, String customerName, String carID) {  
         Rental rental = new Rental(rentDate, returnDate, customerName, carID);
-        rental.setStatus(getRentalStatus("Rented"));
         rented.add(rental);
         return rental;
     }

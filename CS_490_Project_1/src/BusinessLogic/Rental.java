@@ -18,8 +18,6 @@ public class Rental implements Searchable{
     private String customerName;
     private String carID;
     
-    //RentalStatus enum object
-    private RentalStatus status;
     
     //Class Constructor
     public Rental(Calendar rentDate, Calendar returnDate, String customerName, String carID){
@@ -48,16 +46,8 @@ public class Rental implements Searchable{
     //name, phone, and address values
     @Override
     public String[] info(){
-        return new String[]{this.rentDate.toString(), this.returnDate.toString(), this.status.toString()};
+        return new String[]{this.rentDate.toString(), this.returnDate.toString()};
     }
-    
-    public RentalStatus getStatus(){
-        return this.status;
-    }
-    
-    public void setStatus(RentalStatus status){
-        this.status = status;
-    }
-    
+   
     //TODO: Create new functions needed for the class
 }
