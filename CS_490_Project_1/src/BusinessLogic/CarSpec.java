@@ -15,9 +15,9 @@ public class CarSpec {
     private String model;
     private int year;
     
-    //CarSize enum Object
+    //Enum Objects
     private CarSize size; 
-    
+ 
     //Class Constructor
     public CarSpec(String make, String model, int year, CarSize size){
         this.make = make;
@@ -25,9 +25,10 @@ public class CarSpec {
         this.year = year;
         this.size = size;
     }
-    
-    //TODO: Finish this function
+
     public String[] specInfo (){
         return new String[]{this.make, this.model, Integer.toString(this.year), this.size.toString()};
     }
+    
+
 }

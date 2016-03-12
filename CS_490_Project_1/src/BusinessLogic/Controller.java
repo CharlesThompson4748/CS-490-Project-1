@@ -28,7 +28,6 @@ public class Controller {
     //Class Constructor
     private Controller() {}
 
-   
     //Function to return the Singleton class object
     //Input: None
     //Output: Class Singleton object
@@ -48,6 +47,13 @@ public class Controller {
     
     public String getCustomerName(){
         return customerName;
+    }
+    
+    public void setCarToRented(String carID, String status){
+        for(Searchable car:cars){
+            if(car.contains(carID))
+                getRentalStatus(status);
+        }
     }
     
     //Function to convert a String to an RentalStatus enum object
@@ -84,9 +90,9 @@ public class Controller {
                 return RentalStatus.RENTED;
             case "Returned":
                 return RentalStatus.RETURNED;
-            //No match found. Default value to enum RENTED
+            //No match found. Default value to enum RETURNED
             default:
-                return RentalStatus.RENTED;
+                return RentalStatus.RETURNED;
         }
     }
     
@@ -95,7 +101,7 @@ public class Controller {
     //Output: Rental object
     public Rental addRental(Calendar rentDate, Calendar returnDate, String customerName, String carID) {  
         Rental rental = new Rental(rentDate, returnDate, customerName, carID);
-        rental.setStatus(getRentalStatus("Rented"));
+        
         rented.add(rental);
         return rental;
     }
@@ -171,16 +177,17 @@ public class Controller {
         return result;
     }
     
-    /*public Searchable searchRentals(String key){
+    public LinkedList<String[]> searchRentals(String key) {
+        //Create new list to be returned
+        LinkedList<String[]> result = new LinkedList<>();
         //Search the cars list for strings that contain key 
-        Searchable customer;
-        for(Searchable rental:rented) {
-            if(rental.contains(key))
+        for(Searchable car:rented) {
+            if(car.contains(key))
                 //Match found adding to list
-                customer = rental;
-                return rental;
+                
+                result.add(car.info());
         }
-        return customer;
-    }*/
+        return result;
+    }
     
 }

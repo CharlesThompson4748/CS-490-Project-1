@@ -15,8 +15,9 @@ public class Car implements Searchable{
     
     //CarSpec class object
     private CarSpec specs;
-    
+    private RentalStatus status;
     //Class constructor
+    
     public Car(String id){
         this.id = id;
     }
@@ -38,12 +39,6 @@ public class Car implements Searchable{
             return false;
     }
     
-    //Will most likely be removed during refactoring
-    @Override
-    public boolean matches(String key){
-        return this.id.equals(key);
-    }
-    
     //Info function overriden from Searchable interface
     //Input: None
     //Output: String Array of Strings containing the current objects
@@ -60,5 +55,9 @@ public class Car implements Searchable{
         //Create new CarSpec object
         specs = new CarSpec(make, model, year, size);
         return specs;
+    }
+    
+    public void setRentalStatus(RentalStatus status){
+        this.status = status;
     }
 }

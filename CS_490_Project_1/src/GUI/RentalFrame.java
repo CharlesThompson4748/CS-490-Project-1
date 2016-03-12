@@ -15,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class RentalFrame extends javax.swing.JFrame {
     Controller controller = Controller.instance();
+    String name;
     /**
      * Creates new form RentalFrame
      */
@@ -22,6 +23,7 @@ public class RentalFrame extends javax.swing.JFrame {
         initComponents();
         tabs.setSelectedIndex(tabNumber);
         customerName.setText(name);
+        this.name = name;
     }
 
     /**
@@ -49,7 +51,7 @@ public class RentalFrame extends javax.swing.JFrame {
         returnedCarsTable = new javax.swing.JTable();
         customerName = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         FCSearchButton.setText("Search");
         FCSearchButton.addActionListener(new java.awt.event.ActionListener() {
@@ -59,6 +61,11 @@ public class RentalFrame extends javax.swing.JFrame {
         });
 
         FCRentSelected.setText("Rent Selected");
+        FCRentSelected.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FCRentSelectedActionPerformed(evt);
+            }
+        });
 
         FCTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -119,6 +126,11 @@ public class RentalFrame extends javax.swing.JFrame {
         tabs.addTab("Find Car", jPanel2);
 
         rentedCarsButton.setText("Return Selected");
+        rentedCarsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rentedCarsButtonActionPerformed(evt);
+            }
+        });
 
         rentedCarsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -220,7 +232,7 @@ public class RentalFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(customerName)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tabs, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
+                .addComponent(tabs)
                 .addContainerGap())
         );
 
@@ -228,13 +240,42 @@ public class RentalFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void FCSearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FCSearchButtonActionPerformed
-      LinkedList<String[]> cars = controller.searchCars(FCTextField.getText());
-      DefaultTableModel model=(DefaultTableModel)FCTable.getModel();
-      model.setRowCount(0);
-      for(String[] row:cars){
-          model.addRow(row);
-      }
+        LinkedList<String[]> cars = controller.searchCars(FCTextField.getText());
+        DefaultTableModel model=(DefaultTableModel)FCTable.getModel();
+        model.setRowCount(0);
+        for(String[] row:cars){
+            model.addRow(row);
+        }
     }//GEN-LAST:event_FCSearchButtonActionPerformed
+
+    private void FCRentSelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FCRentSelectedActionPerformed
+        LinkedList<String[]> rentals = controller.searchRentals(name);
+        DefaultTableModel model=(DefaultTableModel)rentedCarsTable.getModel();
+        model.setRowCount(0);
+        String make;
+        String carModel;
+        String year;
+        String carID;
+        String rentDate;
+        for (String[] rental: rentals){
+            carID = rental[2];
+            rentDate = rental[0];
+            LinkedList<String[]> cars = controller.searchCars(carID);
+            for (String[] car: cars){
+                make = car[0];
+                carModel = car[1];
+                year = car[2];
+            }
+            //model.addRow();
+        }
+        
+        
+        
+    }//GEN-LAST:event_FCRentSelectedActionPerformed
+
+    private void rentedCarsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentedCarsButtonActionPerformed
+        
+    }//GEN-LAST:event_rentedCarsButtonActionPerformed
 
     /**
      * @param args the command line arguments

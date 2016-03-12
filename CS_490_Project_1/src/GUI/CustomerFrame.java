@@ -13,12 +13,10 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CustomerFrame extends javax.swing.JFrame {
     private Controller controller = Controller.instance();
-    //private RentalFrame rental_frame;
     /**
      * Creates new form CustomerFrame
      */
     public CustomerFrame() {
-        //this.rental_frame = new RentalFrame();
         initComponents();
     }
 
@@ -118,20 +116,27 @@ public class CustomerFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void rentCarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentCarButtonActionPerformed
-        int row = customerTable.getSelectedRow();
-        String name = (String)customerTable.getValueAt(row, 0);
-        name += "'s Account";
-        RentalFrame frame=new RentalFrame(name, 0);
-        frame.setVisible(true);
+        try {
+            int row = customerTable.getSelectedRow();
+            String name = (String)customerTable.getValueAt(row, 0) + "'s Account";
+            RentalFrame frame=new RentalFrame(name, 0);
+            frame.setVisible(true);
+        }
+        catch (Exception e){
+            System.out.println("You need to select a customer first");
+        }
     }//GEN-LAST:event_rentCarButtonActionPerformed
 
     private void rentedCarsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentedCarsButtonActionPerformed
-        int row = customerTable.getSelectedRow();
-        String name = (String)customerTable.getValueAt(row, 0);
-        name += "'s Account";
-        RentalFrame frame = new RentalFrame(name, 1);
-        frame.setVisible(true);
-        
+        try{
+            int row = customerTable.getSelectedRow();
+            String name = (String)customerTable.getValueAt(row, 0) + "'s Account";
+            RentalFrame frame = new RentalFrame(name, 1);
+            frame.setVisible(true);
+        }
+        catch (Exception e){
+            System.out.println("You need to select a customer first");
+        }        
     }//GEN-LAST:event_rentedCarsButtonActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
