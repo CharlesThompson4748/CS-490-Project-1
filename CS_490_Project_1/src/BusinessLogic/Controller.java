@@ -16,7 +16,6 @@ import java.util.Map;
 public class Controller {
     //Creating static Controller object for Singleton class
     private static Controller Singleton;
-   
     private String customerName;
     private Car car;
     
