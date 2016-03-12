@@ -40,12 +40,6 @@ public class CustomerFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        searchTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchTextFieldActionPerformed(evt);
-            }
-        });
-
         searchButton.setText("Search");
         searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,10 +117,6 @@ public class CustomerFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void searchTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTextFieldActionPerformed
-        
-    }//GEN-LAST:event_searchTextFieldActionPerformed
-
     private void rentCarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentCarButtonActionPerformed
         int row = customerTable.getSelectedRow();
         String name = (String)customerTable.getValueAt(row, 0);
@@ -136,7 +126,12 @@ public class CustomerFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_rentCarButtonActionPerformed
 
     private void rentedCarsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentedCarsButtonActionPerformed
-        // TODO add your handling code here:
+        int row = customerTable.getSelectedRow();
+        String name = (String)customerTable.getValueAt(row, 0);
+        name += "'s Account";
+        RentalFrame frame = new RentalFrame(name, 1);
+        frame.setVisible(true);
+        
     }//GEN-LAST:event_rentedCarsButtonActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
