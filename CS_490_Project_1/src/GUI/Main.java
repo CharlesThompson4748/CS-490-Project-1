@@ -6,6 +6,7 @@
 package GUI;
 
 import BusinessLogic.Controller;
+import java.util.GregorianCalendar;
 
 /**
  *
@@ -37,6 +38,8 @@ public class Main {
         controller.addCustomer("Phillip J. Fry", "001-231-2000", "2999 Future Ln.");
         controller.addCustomer("Bender Bending Rodriguez", "470-010-0100", "1800 King Dr.");
         controller.addCustomer("John A. Zoidberg", "158-0245-9752", "200 DumbsterOutBack Rd.");
+        
+        controller.addRental(new GregorianCalendar(2016,11,1), new GregorianCalendar(2016,11,10), "John A. Zoidberg", "11134");
         
         //Creating customer frame and setting it visible
         CustomerFrame frame=new CustomerFrame();

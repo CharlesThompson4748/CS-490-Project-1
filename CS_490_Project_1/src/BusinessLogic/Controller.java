@@ -7,6 +7,7 @@ package BusinessLogic;
 
 import java.util.Calendar;
 import java.util.LinkedList;
+import java.util.Map;
 
 /**
  *
@@ -15,12 +16,15 @@ import java.util.LinkedList;
 public class Controller {
     //Creating static Controller object for Singleton class
     private static Controller Singleton;
+   
+    private String customerName;
+    private Car car;
     
     //Class lists
-    private LinkedList<Searchable> customers = new LinkedList<Searchable>();
-    private LinkedList<Searchable> cars = new LinkedList<Searchable>();
-    private LinkedList<Searchable> rented = new  LinkedList<Searchable>();
-    private LinkedList<Searchable> returned = new  LinkedList<Searchable>();
+    private LinkedList<Searchable> customers = new LinkedList<>();
+    private LinkedList<Searchable> cars = new LinkedList<>();
+    private LinkedList<Searchable> rented = new  LinkedList<>();
+    private LinkedList<Searchable> returned = new  LinkedList<>();
     
     //Class Constructor
     private Controller() {}
@@ -37,6 +41,14 @@ public class Controller {
         }
         //Return the Singleton class object
         return Singleton;
+    }
+    
+    public void setCustomerName(String name){
+        customerName = name;
+    }
+    
+    public String getCustomerName(){
+        return customerName;
     }
     
     //Function to convert a String to an RentalStatus enum object
@@ -82,10 +94,17 @@ public class Controller {
     //Function to create a new Rental object and add to the List of customers
     //Input: TODO
     //Output: Rental object
-    public Rental addRental(RentalStatus status, Calendar rentDate, Calendar returnDate, String customerName, String carID) {  
-        Rental rental = new Rental(rentDate, returnDate, status);
+    public Rental addRental(Calendar rentDate, Calendar returnDate, String customerName, String carID) {  
+        Rental rental = new Rental(rentDate, returnDate, customerName, carID);
+        rental.setStatus(getRentalStatus("Rented"));
+        rented.add(rental);
         return rental;
     }
+    
+    public void returnRental(String customer){
+        //searchRentals(customer);
+    }
+    
     
     //Function to create a new Customer object and add to the List of customers
     //Input: Strings for the customer name, phone, and address
@@ -95,10 +114,9 @@ public class Controller {
         try {
             name.toLowerCase();
         }
-        catch (NumberFormatException e) {
+        catch (Exception e) {
             System.out.println("Exception thrown  :" + e);
         }
-        
         //Creating new Customer object
         Customer newCustomer = new Customer(name, phone, address);
         //Adding new object to customer list
@@ -128,7 +146,7 @@ public class Controller {
     //input value
     public LinkedList<String[]> searchCustomers(String key) {
         //Create new list to be returned
-        LinkedList<String[]> result = new LinkedList<String[]>();
+        LinkedList<String[]> result = new LinkedList<>();
         //Search the customers list for strings that contain key 
         for(Searchable customer:customers) {
             if(customer.contains(key))
@@ -144,7 +162,7 @@ public class Controller {
     //input value
     public LinkedList<String[]> searchCars(String key) {
         //Create new list to be returned
-        LinkedList<String[]> result = new LinkedList<String[]>();
+        LinkedList<String[]> result = new LinkedList<>();
         //Search the cars list for strings that contain key 
         for(Searchable car:cars) {
             if(car.contains(key))
@@ -153,5 +171,17 @@ public class Controller {
         }
         return result;
     }
+    
+    /*public Searchable searchRentals(String key){
+        //Search the cars list for strings that contain key 
+        Searchable customer;
+        for(Searchable rental:rented) {
+            if(rental.contains(key))
+                //Match found adding to list
+                customer = rental;
+                return rental;
+        }
+        return customer;
+    }*/
     
 }

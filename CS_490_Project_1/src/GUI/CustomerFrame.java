@@ -128,7 +128,10 @@ public class CustomerFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_searchTextFieldActionPerformed
 
     private void rentCarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentCarButtonActionPerformed
-        RentalFrame frame=new RentalFrame();
+        int row = customerTable.getSelectedRow();
+        String name = (String)customerTable.getValueAt(row, 0);
+        name += "'s Account";
+        RentalFrame frame=new RentalFrame(name, 0);
         frame.setVisible(true);
     }//GEN-LAST:event_rentCarButtonActionPerformed
 
