@@ -5,10 +5,6 @@
  */
 package BusinessLogic;
 
-/**
- *
- * @author charlie
- */
 public interface Searchable {
     //Interface functions
     public boolean contains(String key);
