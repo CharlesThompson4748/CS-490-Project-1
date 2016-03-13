@@ -6,7 +6,10 @@
 package GUI;
 
 import BusinessLogic.Controller;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.LinkedList;
+import java.util.Locale;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -252,10 +255,12 @@ public class RentalFrame extends javax.swing.JFrame {
         LinkedList<String[]> rentals = controller.searchRentals(name);
         DefaultTableModel model=(DefaultTableModel)rentedCarsTable.getModel();
         model.setRowCount(0);
+        int row = FCTable.getSelectedRow();
+        controller.addRental(GregorianCalendar.getInstance(Locale.US), GregorianCalendar.getInstance(Locale.US), name, (String)FCTable.getValueAt(row, 1));
         for (String[] rental: rentals){
             LinkedList<String[]> cars = controller.searchCars(rental[2]);
             for (String[] car: cars){
-                model.addRow(new Object[]{car[0], car[1], car[2], rental[0]});
+                model.addRow(new String[]{car[0], car[1], car[2], rental[0]});
             }          
         }
         tabs.setSelectedIndex(1); 

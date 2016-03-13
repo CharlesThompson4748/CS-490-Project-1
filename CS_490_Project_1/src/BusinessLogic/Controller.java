@@ -181,11 +181,10 @@ public class Controller {
         //Create new list to be returned
         LinkedList<String[]> result = new LinkedList<>();
         //Search the cars list for strings that contain key 
-        for(Searchable car:rented) {
-            if(car.contains(key))
-                //Match found adding to list
-                
-                result.add(car.info());
+        for(Searchable rental:rented) {
+            if(rental.contains(key))
+                //Match found adding to list            
+                result.add(rental.info());
         }
         return result;
     }
