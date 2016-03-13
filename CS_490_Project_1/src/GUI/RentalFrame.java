@@ -104,6 +104,8 @@ public class RentalFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        FCTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        FCTable.setRowSelectionAllowed(true);
         jScrollPane1.setViewportView(FCTable);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -162,6 +164,7 @@ public class RentalFrame extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        rentedCarsTable.setRowSelectionAllowed(true);
         jScrollPane2.setViewportView(rentedCarsTable);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -270,10 +273,12 @@ public class RentalFrame extends javax.swing.JFrame {
     private void FCRentSelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FCRentSelectedActionPerformed
         try{
             //Creating new rental for the selected row in FCTable
-            int[] selectedRows = FCTable.getSelectedRows();
-            for (int row: selectedRows){
-                controller.addRental(GregorianCalendar.getInstance(Locale.US), GregorianCalendar.getInstance(Locale.US), name, (String)FCTable.getValueAt(row, 1));
-            }    
+            int rowCount = FCTable.getRowCount();
+            for (int row = 0; row<rowCount; row++){
+                if ((Boolean)FCTable.getValueAt(row,0) != null && (Boolean)FCTable.getValueAt(row,0) != false){
+                    controller.addRental(GregorianCalendar.getInstance(Locale.US), GregorianCalendar.getInstance(Locale.US), name, (String)FCTable.getValueAt(row, 1));
+                }
+            }           
             LinkedList<String[]> rentals = controller.searchRentals(name);
             DefaultTableModel model=(DefaultTableModel)rentedCarsTable.getModel();
             model.setRowCount(0);
@@ -281,7 +286,7 @@ public class RentalFrame extends javax.swing.JFrame {
                 LinkedList<String[]> cars = controller.searchCars(rental[2]);
                 for (String[] car: cars){
                     model.addRow(new String[]{null, car[2], car[3], car[4], rental[0]});
-                }          
+                }
             }
             tabs.setSelectedIndex(1); 
         }
@@ -292,6 +297,14 @@ public class RentalFrame extends javax.swing.JFrame {
 
     private void rentedCarsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentedCarsButtonActionPerformed
         try{  
+            int rowCount = rentedCarsTable.getRowCount();
+            for (int row = 0; row<rowCount; row++){
+                if ((Boolean)rentedCarsTable.getValueAt(row,0) != null && (Boolean)rentedCarsTable.getValueAt(row,0) != false){
+                    //Need to add code for returns. The rented table doesn't have an id, so how do we identify a vehicle?
+                    //Example: What if you rented two of the same make, model, and year? How do you know which is which without an ID?
+                    //Maybe we can get the index of the item on the table and match it to the vehicle in the linked list. Then grab the ID from there.
+                }
+            }     
             LinkedList<String[]> rentals = controller.searchRentals(name);
             DefaultTableModel model=(DefaultTableModel)returnedCarsTable.getModel();
             model.setRowCount(0);
