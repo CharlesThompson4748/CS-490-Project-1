@@ -29,6 +29,15 @@ public class RentalFrame extends javax.swing.JFrame {
         tabs.setSelectedIndex(tabNumber);
         customerName.setText(name);
         this.name = name;
+        LinkedList<String[]> rentals = controller.searchRentals(name);
+        DefaultTableModel model=(DefaultTableModel)rentedCarsTable.getModel();
+        model.setRowCount(0);
+        for (String[] rental: rentals){
+            LinkedList<String[]> cars = controller.searchCars(rental[2]);
+            for (String[] car: cars){
+                model.addRow(new String[]{null, car[2], car[3], car[4], rental[0]});
+            }          
+        }
     }
 
     /**
@@ -259,7 +268,6 @@ public class RentalFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_FCSearchButtonActionPerformed
 
     private void FCRentSelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FCRentSelectedActionPerformed
-    
         try{
             //Creating new rental for the selected row in FCTable
             int[] selectedRows = FCTable.getSelectedRows();

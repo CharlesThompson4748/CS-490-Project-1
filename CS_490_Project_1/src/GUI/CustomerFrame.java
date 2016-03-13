@@ -133,6 +133,7 @@ public class CustomerFrame extends javax.swing.JFrame {
             String name = (String)customerTable.getValueAt(row, 0) + "'s Account";
             RentalFrame frame = new RentalFrame(name, 1);
             frame.setVisible(true);
+            
         }
         catch (Exception e){
             System.out.println("You need to select a customer first");
