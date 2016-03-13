@@ -5,6 +5,8 @@
  */
 package BusinessLogic;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -109,10 +111,11 @@ public class Controller {
     
     public void returnRental(String key){
         LinkedList<String[]> rentals = searchRentals(key);
-        String CarID;
+        Searchable item = null;
         for(String[] rental:rentals){
-          CarID = rental[3];
-          deleteItem(CarID, rented);
+          if(rental[3].contains(key))
+                item = rented.pop();
+                returned.add(item);
         }
         
     }
