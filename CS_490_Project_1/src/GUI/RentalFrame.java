@@ -252,15 +252,17 @@ public class RentalFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_FCSearchButtonActionPerformed
 
     private void FCRentSelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FCRentSelectedActionPerformed
+        //Creating new rental for the selected row in FCTable
+        controller.addRental(GregorianCalendar.getInstance(Locale.US), 
+                GregorianCalendar.getInstance(Locale.US), name, 
+                (String)FCTable.getValueAt(FCTable.getSelectedRow(), 1));
         LinkedList<String[]> rentals = controller.searchRentals(name);
         DefaultTableModel model=(DefaultTableModel)rentedCarsTable.getModel();
         model.setRowCount(0);
-        int row = FCTable.getSelectedRow();
-        controller.addRental(GregorianCalendar.getInstance(Locale.US), GregorianCalendar.getInstance(Locale.US), name, (String)FCTable.getValueAt(row, 1));
         for (String[] rental: rentals){
             LinkedList<String[]> cars = controller.searchCars(rental[2]);
             for (String[] car: cars){
-                model.addRow(new String[]{car[0], car[1], car[2], rental[0]});
+                model.addRow(new String[]{null, car[2], car[3], car[4], rental[0]});
             }          
         }
         tabs.setSelectedIndex(1); 

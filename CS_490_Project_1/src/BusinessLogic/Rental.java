@@ -46,7 +46,7 @@ public class Rental implements Searchable{
     //name, phone, and address values
     @Override
     public String[] info(){
-        return new String[]{this.rentDate.toString(), this.returnDate.toString()};
+        return new String[]{this.rentDate.toString(), this.returnDate.toString(), this.carID};
     }
    
     //TODO: Create new functions needed for the class
