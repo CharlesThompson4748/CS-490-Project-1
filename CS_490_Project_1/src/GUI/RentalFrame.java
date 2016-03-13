@@ -272,9 +272,7 @@ public class RentalFrame extends javax.swing.JFrame {
             //Creating new rental for the selected row in FCTable
             int[] selectedRows = FCTable.getSelectedRows();
             for (int row: selectedRows){
-                controller.addRental(GregorianCalendar.getInstance(Locale.US), 
-                        GregorianCalendar.getInstance(Locale.US), name, 
-                        (String)FCTable.getValueAt(row, 1));
+                controller.addRental(GregorianCalendar.getInstance(Locale.US), GregorianCalendar.getInstance(Locale.US), name, (String)FCTable.getValueAt(row, 1));
             }    
             LinkedList<String[]> rentals = controller.searchRentals(name);
             DefaultTableModel model=(DefaultTableModel)rentedCarsTable.getModel();
@@ -288,12 +286,26 @@ public class RentalFrame extends javax.swing.JFrame {
             tabs.setSelectedIndex(1); 
         }
         catch(Exception e){
-            System.out.println("You need to select a car first");
+            System.out.println("Exception: " + e);
         }
     }//GEN-LAST:event_FCRentSelectedActionPerformed
 
     private void rentedCarsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentedCarsButtonActionPerformed
-        
+        try{  
+            LinkedList<String[]> rentals = controller.searchRentals(name);
+            DefaultTableModel model=(DefaultTableModel)returnedCarsTable.getModel();
+            model.setRowCount(0);
+            for (String[] rental: rentals){
+                LinkedList<String[]> cars = controller.searchCars(rental[2]);
+                for (String[] car: cars){
+                    model.addRow(new String[]{rental[2], car[2], car[3], car[4], rental[0], rental[1]});
+                }          
+            }
+            tabs.setSelectedIndex(2); 
+        }
+        catch(Exception e){
+            System.out.println("Exception: " + e);
+        }
     }//GEN-LAST:event_rentedCarsButtonActionPerformed
 
     /**

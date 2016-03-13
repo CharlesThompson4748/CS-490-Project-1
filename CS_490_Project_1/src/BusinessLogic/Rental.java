@@ -6,6 +6,7 @@
 package BusinessLogic;
 
 import java.util.Calendar;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -27,6 +28,18 @@ public class Rental implements Searchable{
         this.carID = carID;
     }
     
+    public String getRentalDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        String date = dateFormat.format(rentDate.getTime());
+        return date;
+    }
+    
+    public String getReturnDate(){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        String date = dateFormat.format(returnDate.getTime());
+        return date;
+    }
+    
     //Contains function overriden from Searchable interface
     //Input: String containing the value to be compared against
     //Output: Boolean based on if the any of the value match the input
@@ -46,7 +59,7 @@ public class Rental implements Searchable{
     //name, phone, and address values
     @Override
     public String[] info(){
-        return new String[]{this.rentDate.toString(), this.returnDate.toString(), this.carID};
+        return new String[]{this.getRentalDate(), this.getReturnDate(), this.carID};
     }
    
     //TODO: Create new functions needed for the class
