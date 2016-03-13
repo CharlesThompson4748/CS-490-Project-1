@@ -113,21 +113,12 @@ public class Controller {
         LinkedList<String[]> rentals = searchRentals(key);
         Searchable item = null;
         for(String[] rental:rentals){
-          if(rental[3].contains(key))
+            if(rental[3].contains(key)){
                 item = rented.pop();
                 returned.add(item);
+            }
         }
         
-    }
-    
-        
-    public void deleteItem(String key, LinkedList<Searchable> list){
-        Iterator<Searchable> itr = list.iterator();
-        while(itr.hasNext()){
-            Searchable course = itr.next();
-            if(course.contains(key))
-                itr.remove();
-        }
     }
     
     //Function to create a new Customer object and add to the List of customers

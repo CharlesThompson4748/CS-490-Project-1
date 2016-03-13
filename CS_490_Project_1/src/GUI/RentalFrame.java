@@ -259,30 +259,15 @@ public class RentalFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_FCSearchButtonActionPerformed
 
     private void FCRentSelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FCRentSelectedActionPerformed
-<<<<<<< HEAD
-        //Creating new rental for the selected row in FCTable
-        int[] selectedRows = FCTable.getSelectedRows();
-        for (int row: selectedRows){
-            controller.addRental(GregorianCalendar.getInstance(Locale.US), 
-                    GregorianCalendar.getInstance(Locale.US), name, 
-                    (String)FCTable.getValueAt(row, 1));
-        }
-        LinkedList<String[]> rentals = controller.searchRentals(name);
-        DefaultTableModel model=(DefaultTableModel)rentedCarsTable.getModel();
-        model.setRowCount(0);
-        for (String[] rental: rentals){
-            LinkedList<String[]> cars = controller.searchCars(rental[2]);
-            for (String[] car: cars){
-                model.addRow(new String[]{null, car[2], car[3], car[4], rental[0]});
-            }          
-=======
+    
         try{
-            if (FCTable.getValueAt(FCTable.getSelectedRow(), 0) != null){
-                //Creating new rental for the selected row in FCTable
+            //Creating new rental for the selected row in FCTable
+            int[] selectedRows = FCTable.getSelectedRows();
+            for (int row: selectedRows){
                 controller.addRental(GregorianCalendar.getInstance(Locale.US), 
                         GregorianCalendar.getInstance(Locale.US), name, 
-                        (String)FCTable.getValueAt(FCTable.getSelectedRow(), 1));
-            }
+                        (String)FCTable.getValueAt(row, 1));
+            }    
             LinkedList<String[]> rentals = controller.searchRentals(name);
             DefaultTableModel model=(DefaultTableModel)rentedCarsTable.getModel();
             model.setRowCount(0);
@@ -296,7 +281,6 @@ public class RentalFrame extends javax.swing.JFrame {
         }
         catch(Exception e){
             System.out.println("You need to select a car first");
->>>>>>> c2c2c14a666aa018a2b75190d2eee946f14e5403
         }
     }//GEN-LAST:event_FCRentSelectedActionPerformed
 
