@@ -252,25 +252,13 @@ public class RentalFrame extends javax.swing.JFrame {
         LinkedList<String[]> rentals = controller.searchRentals(name);
         DefaultTableModel model=(DefaultTableModel)rentedCarsTable.getModel();
         model.setRowCount(0);
-        String make;
-        String carModel;
-        String year;
-        String carID;
-        String rentDate;
         for (String[] rental: rentals){
-            carID = rental[2];
-            rentDate = rental[0];
-            LinkedList<String[]> cars = controller.searchCars(carID);
+            LinkedList<String[]> cars = controller.searchCars(rental[2]);
             for (String[] car: cars){
-                make = car[0];
-                carModel = car[1];
-                year = car[2];
-            }
-            //model.addRow();
+                model.addRow(new Object[]{car[0], car[1], car[2], rental[0]});
+            }          
         }
-        
-        
-        
+        tabs.setSelectedIndex(1); 
     }//GEN-LAST:event_FCRentSelectedActionPerformed
 
     private void rentedCarsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentedCarsButtonActionPerformed
