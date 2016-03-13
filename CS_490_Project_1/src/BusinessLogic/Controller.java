@@ -5,7 +5,10 @@
  */
 package BusinessLogic;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 
@@ -40,6 +43,7 @@ public class Controller {
         //Return the Singleton class object
         return Singleton;
     }
+
     
     public void setCustomerName(String name){
         customerName = name;
@@ -100,16 +104,31 @@ public class Controller {
     //Input: TODO
     //Output: Rental object
     public Rental addRental(Calendar rentDate, Calendar returnDate, String customerName, String carID) {  
-        Rental rental = new Rental(rentDate, returnDate, customerName, carID);
-        
+        Rental rental = new Rental(rentDate, returnDate, customerName, carID);      
         rented.add(rental);
         return rental;
     }
     
-    public void returnRental(String customer){
-        //searchRentals(customer);
+    public void returnRental(String key){
+        LinkedList<String[]> rentals = searchRentals(key);
+        Searchable item = null;
+        for(String[] rental:rentals){
+          if(rental[3].contains(key))
+                item = rented.pop();
+                returned.add(item);
+        }
+        
     }
     
+        
+    public void deleteItem(String key, LinkedList<Searchable> list){
+        Iterator<Searchable> itr = list.iterator();
+        while(itr.hasNext()){
+            Searchable course = itr.next();
+            if(course.contains(key))
+                itr.remove();
+        }
+    }
     
     //Function to create a new Customer object and add to the List of customers
     //Input: Strings for the customer name, phone, and address
