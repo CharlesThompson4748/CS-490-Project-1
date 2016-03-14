@@ -112,12 +112,12 @@ public class Controller {
     }
     
     public void returnRental(String key){
-        LinkedList<String[]> rentals = searchRentals(key);
-        for(Iterator<Searchable> iter = rented.iterator(); iter.hasNext();){
+        Iterator<Searchable> iter = rented.iterator();
+        while(iter.hasNext()){
             Searchable item = iter.next();
             if(item.getID().contains(key)){
-                item = rented.remove();
                 returned.add(item);
+                iter.remove();
             }
         }
     }
