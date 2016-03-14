@@ -54,9 +54,11 @@ public class Controller {
     }
     
     public void setCarToRented(String carID, String status){
-        for(Searchable car:cars){
-            if(car.contains(carID))
-                getRentalStatus(status);
+        for(Iterator<Searchable> iter = cars.iterator(); iter.hasNext();){
+            Searchable item = iter.next();
+            if(item.getID().contains(carID)){
+                item.setRentalStatus(getRentalStatus(status));
+            }
         }
     }
     
