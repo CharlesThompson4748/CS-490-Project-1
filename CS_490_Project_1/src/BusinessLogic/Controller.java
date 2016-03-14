@@ -57,7 +57,7 @@ public class Controller {
         for(Iterator<Searchable> iter = cars.iterator(); iter.hasNext();){
             Searchable item = iter.next();
             if(item.getID().contains(carID)){
-                item.setRentalStatus(getRentalStatus(status));
+                //item.setRentalStatus(getRentalStatus(status));
             }
         }
     }

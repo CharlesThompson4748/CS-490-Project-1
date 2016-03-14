@@ -29,8 +29,22 @@ public class RentalFrame extends javax.swing.JFrame {
         tabs.setSelectedIndex(tabNumber);
         customerName.setText(name);
         this.name = name;
+        searchCars();
     }
-
+    
+    private void searchCars(){
+        try {    
+            LinkedList<String[]> cars = controller.searchCars(FCTextField.getText());
+            DefaultTableModel model=(DefaultTableModel)FCTable.getModel();
+            model.setRowCount(0);
+            for(String[] row:cars){
+                model.addRow(row);
+            }
+        }
+        catch(Exception e){
+            System.out.println("Exception: " + e);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -251,17 +265,7 @@ public class RentalFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void FCSearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FCSearchButtonActionPerformed
-        try {    
-            LinkedList<String[]> cars = controller.searchCars(FCTextField.getText());
-            DefaultTableModel model=(DefaultTableModel)FCTable.getModel();
-            model.setRowCount(0);
-            for(String[] row:cars){
-                model.addRow(row);
-            }
-        }
-        catch(Exception e){
-            System.out.println("Exception: " + e);
-        }
+        searchCars();
     }//GEN-LAST:event_FCSearchButtonActionPerformed
 
     private void FCRentSelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FCRentSelectedActionPerformed
@@ -294,6 +298,8 @@ public class RentalFrame extends javax.swing.JFrame {
             LinkedList<String[]> rentals = controller.searchRentals(name);
             DefaultTableModel returnedModel=(DefaultTableModel)rentedCarsTable.getModel();
             DefaultTableModel rentedModel=(DefaultTableModel)returnedCarsTable.getModel();
+            ReturnDateFrame frame=new ReturnDateFrame();
+            frame.setVisible(true);
             rentedModel.setRowCount(0);
             int rowCount = rentedCarsTable.getRowCount();
             for (int row = 0; row<rowCount; row++){

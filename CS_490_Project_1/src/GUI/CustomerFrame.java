@@ -12,14 +12,28 @@ import javax.swing.table.DefaultTableModel;
  * @author Katrina Flynn
  */
 public class CustomerFrame extends javax.swing.JFrame {
-    private Controller controller = Controller.instance();
+    Controller controller = Controller.instance();
     /**
      * Creates new form CustomerFrame
      */
     public CustomerFrame() {
         initComponents();
+        searchCustomers();
     }
-
+    
+    public void searchCustomers(){
+        try{
+            LinkedList<String[]> customers=controller.searchCustomers(searchTextField.getText());
+            DefaultTableModel model=(DefaultTableModel)customerTable.getModel();
+            model.setRowCount(0);
+            for(String[] row:customers){
+                model.addRow(row);
+            }
+        }
+        catch (Exception e){
+            System.out.println("You need to select a customer first");
+        }     
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -141,12 +155,7 @@ public class CustomerFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_rentedCarsButtonActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-      LinkedList<String[]> employees=controller.searchCustomers(searchTextField.getText());
-      DefaultTableModel model=(DefaultTableModel)customerTable.getModel();
-      model.setRowCount(0);
-      for(String[] row:employees){
-          model.addRow(row);
-      }
+        searchCustomers();
     }//GEN-LAST:event_searchButtonActionPerformed
 
     
