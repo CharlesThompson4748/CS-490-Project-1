@@ -30,6 +30,7 @@ public class RentalFrame extends javax.swing.JFrame {
         customerName.setText(name);
         this.name = name;
         searchCars();
+        searchRentals();
     }
     
     private void searchCars(){
@@ -40,6 +41,31 @@ public class RentalFrame extends javax.swing.JFrame {
             for(String[] row:cars){
                 model.addRow(row);
             }
+        }
+        catch(Exception e){
+            System.out.println("Exception: " + e);
+        }
+    }
+    
+    private void searchRentals(){
+        try{
+            //Creating new rental for the selected row in FCTable
+            int rowCount = FCTable.getRowCount();
+            for (int row = 0; row<rowCount; row++){
+                if ((Boolean)FCTable.getValueAt(row,0) != null && (Boolean)FCTable.getValueAt(row,0) != false){
+                    controller.addRental(GregorianCalendar.getInstance(Locale.US), GregorianCalendar.getInstance(Locale.US), name, (String)FCTable.getValueAt(row, 1));
+                }
+            }           
+            LinkedList<String[]> rentals = controller.searchRentals(name);
+            DefaultTableModel model=(DefaultTableModel)rentedCarsTable.getModel();
+            model.setRowCount(0);
+            for (String[] rental: rentals){
+                LinkedList<String[]> cars = controller.searchCars(rental[2]);
+                for (String[] car: cars){
+                    model.addRow(new String[]{null, car[2], car[3], car[4], rental[0]});
+                }
+            }
+            tabs.setSelectedIndex(1); 
         }
         catch(Exception e){
             System.out.println("Exception: " + e);
@@ -71,11 +97,6 @@ public class RentalFrame extends javax.swing.JFrame {
         customerName = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                formFocusGained(evt);
-            }
-        });
 
         FCSearchButton.setText("Search");
         FCSearchButton.addActionListener(new java.awt.event.ActionListener() {
@@ -269,28 +290,7 @@ public class RentalFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_FCSearchButtonActionPerformed
 
     private void FCRentSelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FCRentSelectedActionPerformed
-        try{
-            //Creating new rental for the selected row in FCTable
-            int rowCount = FCTable.getRowCount();
-            for (int row = 0; row<rowCount; row++){
-                if ((Boolean)FCTable.getValueAt(row,0) != null && (Boolean)FCTable.getValueAt(row,0) != false){
-                    controller.addRental(GregorianCalendar.getInstance(Locale.US), GregorianCalendar.getInstance(Locale.US), name, (String)FCTable.getValueAt(row, 1));
-                }
-            }           
-            LinkedList<String[]> rentals = controller.searchRentals(name);
-            DefaultTableModel model=(DefaultTableModel)rentedCarsTable.getModel();
-            model.setRowCount(0);
-            for (String[] rental: rentals){
-                LinkedList<String[]> cars = controller.searchCars(rental[2]);
-                for (String[] car: cars){
-                    model.addRow(new String[]{null, car[2], car[3], car[4], rental[0]});
-                }
-            }
-            tabs.setSelectedIndex(1); 
-        }
-        catch(Exception e){
-            System.out.println("Exception: " + e);
-        }
+        searchRentals();
     }//GEN-LAST:event_FCRentSelectedActionPerformed
 
     private void rentedCarsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentedCarsButtonActionPerformed
@@ -323,20 +323,6 @@ public class RentalFrame extends javax.swing.JFrame {
             System.out.println("Exception: " + e);
         }
     }//GEN-LAST:event_rentedCarsButtonActionPerformed
-
-    private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
-        LinkedList<String[]> rentals = controller.searchRentals(name);
-        LinkedList<String[]> returns = controller.searchRentals(name);
-        DefaultTableModel model=(DefaultTableModel)rentedCarsTable.getModel();
-        DefaultTableModel model2=(DefaultTableModel)returnedCarsTable.getModel();
-        for (String[] rental: rentals){
-            LinkedList<String[]> cars = controller.searchCars(rental[2]);
-            for (String[] car: cars){
-                model.addRow(new String[]{null, car[2], car[3], car[4], rental[0]});
-                model.addRow(new String[]{rental[2], car[2], car[3], car[4], rental[0], rental[1]});
-            }          
-        }
-    }//GEN-LAST:event_formFocusGained
 
     /**
      * @param args the command line arguments

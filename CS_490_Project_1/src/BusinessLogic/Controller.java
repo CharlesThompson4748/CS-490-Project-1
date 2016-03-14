@@ -200,4 +200,16 @@ public class Controller {
         return result;
     }
     
+    public LinkedList<String[]> searchReturns(String key) {
+        //Create new list to be returned
+        LinkedList<String[]> result = new LinkedList<>();
+        //Search the cars list for strings that contain key 
+        for(Searchable rental:returned) {
+            if(rental.contains(key))
+                //Match found adding to list            
+                result.add(rental.info());
+        }
+        return result;
+    }
+    
 }
