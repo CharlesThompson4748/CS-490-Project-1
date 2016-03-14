@@ -12,7 +12,7 @@ import java.util.GregorianCalendar;
  *
  * @author charlie
  */
-public class Main {
+public class CarRental {
     public static void main(String[] args){
         //Creating new controller object
         Controller controller = Controller.instance();
