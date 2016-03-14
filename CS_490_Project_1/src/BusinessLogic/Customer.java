@@ -45,5 +45,10 @@ public class Customer implements Searchable{
         else 
             return false;
     }
+    
+    @Override
+    public String getID(){
+        return this.name;
+    }
 
 }

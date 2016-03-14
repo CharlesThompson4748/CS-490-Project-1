@@ -299,8 +299,11 @@ public class RentalFrame extends javax.swing.JFrame {
             for (int row = 0; row<rowCount; row++){
                 for (String[] rental: rentals){
                     if ((Boolean)rentedCarsTable.getValueAt(row,0) != null && (Boolean)rentedCarsTable.getValueAt(row,0) != false){             
+                        
                         LinkedList<String[]> cars = controller.searchCars(rental[2]);
+                        
                         for (String[] car: cars){
+                            controller.returnRental(rental[2]);
                             rentedModel.addRow(new String[]{rental[2], car[2], car[3], car[4], rental[0], rental[1]});
                             
                         }  

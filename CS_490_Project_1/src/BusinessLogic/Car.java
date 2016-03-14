@@ -49,6 +49,10 @@ public class Car implements Searchable{
             this.specs.specInfo()[3]};
     }
     
+    @Override
+    public String getID(){
+        return this.id;
+    }
     //Fucntion to add specs to the current car object
     //Input: String for make and model, int for year, and CarSize enum object 
     public CarSpec addSpecs(String make, String model, int year, CarSize size){

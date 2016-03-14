@@ -40,6 +40,10 @@ public class Rental implements Searchable{
         return date;
     }
     
+    @Override
+    public String getID(){
+        return this.carID;
+    }
     //Contains function overriden from Searchable interface
     //Input: String containing the value to be compared against
     //Output: Boolean based on if the any of the value match the input

@@ -39,10 +39,10 @@ public class CarRental {
         controller.addCustomer("Bender Bending Rodriguez", "470-010-0100", "1800 King Dr.");
         controller.addCustomer("John A. Zoidberg", "158-0245-9752", "200 DumbsterOutBack Rd.");
         
-        controller.addRental(new GregorianCalendar(2016,1,1), new GregorianCalendar(2016,1,10), "John A. Zoidberg", "11134");
-        controller.addRental(new GregorianCalendar(2016,1,5), new GregorianCalendar(2016,1,10), "Charles Thompson", "56481");
-        controller.addRental(new GregorianCalendar(2016,1,8), new GregorianCalendar(2016,1,15), "Katrina Flynn", "31767");
-        controller.addRental(new GregorianCalendar(2016,1,15), new GregorianCalendar(2016,1,20), "Phillip J. Fry", "53231");
+        controller.addRental(new GregorianCalendar(2016,01,01), new GregorianCalendar(2016,01,10), "John A. Zoidberg", "11134");
+        controller.addRental(new GregorianCalendar(2016,01,05), new GregorianCalendar(2016,01,10), "Charles Thompson", "56481");
+        controller.addRental(new GregorianCalendar(2016,01,07), new GregorianCalendar(2016,01,15), "Katrina Flynn", "31767");
+        controller.addRental(new GregorianCalendar(2016,01,15), new GregorianCalendar(2016,01,20), "Phillip J. Fry", "53231");
         
         //Creating customer frame and setting it visible
         CustomerFrame frame=new CustomerFrame();

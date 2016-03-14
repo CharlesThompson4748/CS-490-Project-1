@@ -111,14 +111,13 @@ public class Controller {
     
     public void returnRental(String key){
         LinkedList<String[]> rentals = searchRentals(key);
-        Searchable item = null;
-        for(String[] rental:rentals){
-            if(rental[3].contains(key)){
-                item = rented.pop();
+        for(Iterator<Searchable> iter = rented.iterator(); iter.hasNext();){
+            Searchable item = iter.next();
+            if(item.getID().contains(key)){
+                item = rented.remove();
                 returned.add(item);
             }
         }
-        
     }
     
     //Function to create a new Customer object and add to the List of customers
