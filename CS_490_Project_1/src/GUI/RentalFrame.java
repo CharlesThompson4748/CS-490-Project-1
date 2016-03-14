@@ -29,15 +29,6 @@ public class RentalFrame extends javax.swing.JFrame {
         tabs.setSelectedIndex(tabNumber);
         customerName.setText(name);
         this.name = name;
-        LinkedList<String[]> rentals = controller.searchRentals(name);
-        DefaultTableModel model=(DefaultTableModel)rentedCarsTable.getModel();
-        model.setRowCount(0);
-        for (String[] rental: rentals){
-            LinkedList<String[]> cars = controller.searchCars(rental[2]);
-            for (String[] car: cars){
-                model.addRow(new String[]{null, car[2], car[3], car[4], rental[0]});
-            }          
-        }
     }
 
     /**
@@ -66,6 +57,11 @@ public class RentalFrame extends javax.swing.JFrame {
         customerName = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                formFocusGained(evt);
+            }
+        });
 
         FCSearchButton.setText("Search");
         FCSearchButton.addActionListener(new java.awt.event.ActionListener() {
@@ -105,7 +101,6 @@ public class RentalFrame extends javax.swing.JFrame {
             }
         });
         FCTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        FCTable.setRowSelectionAllowed(true);
         jScrollPane1.setViewportView(FCTable);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -164,7 +159,6 @@ public class RentalFrame extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        rentedCarsTable.setRowSelectionAllowed(true);
         jScrollPane2.setViewportView(rentedCarsTable);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -296,30 +290,44 @@ public class RentalFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_FCRentSelectedActionPerformed
 
     private void rentedCarsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentedCarsButtonActionPerformed
-        try{  
+        try{
+            LinkedList<String[]> rentals = controller.searchRentals(name);
+            DefaultTableModel returnedModel=(DefaultTableModel)rentedCarsTable.getModel();
+            DefaultTableModel rentedModel=(DefaultTableModel)returnedCarsTable.getModel();
+            rentedModel.setRowCount(0);
             int rowCount = rentedCarsTable.getRowCount();
             for (int row = 0; row<rowCount; row++){
-                if ((Boolean)rentedCarsTable.getValueAt(row,0) != null && (Boolean)rentedCarsTable.getValueAt(row,0) != false){
-                    //Need to add code for returns. The rented table doesn't have an id, so how do we identify a vehicle?
-                    //Example: What if you rented two of the same make, model, and year? How do you know which is which without an ID?
-                    //Maybe we can get the index of the item on the table and match it to the vehicle in the linked list. Then grab the ID from there.
+                for (String[] rental: rentals){
+                    if ((Boolean)rentedCarsTable.getValueAt(row,0) != null && (Boolean)rentedCarsTable.getValueAt(row,0) != false){             
+                        LinkedList<String[]> cars = controller.searchCars(rental[2]);
+                        for (String[] car: cars){
+                            rentedModel.addRow(new String[]{rental[2], car[2], car[3], car[4], rental[0], rental[1]});
+                            
+                        }  
+                        returnedModel.removeRow(row);
+                    }
                 }
             }     
-            LinkedList<String[]> rentals = controller.searchRentals(name);
-            DefaultTableModel model=(DefaultTableModel)returnedCarsTable.getModel();
-            model.setRowCount(0);
-            for (String[] rental: rentals){
-                LinkedList<String[]> cars = controller.searchCars(rental[2]);
-                for (String[] car: cars){
-                    model.addRow(new String[]{rental[2], car[2], car[3], car[4], rental[0], rental[1]});
-                }          
-            }
             tabs.setSelectedIndex(2); 
         }
         catch(Exception e){
             System.out.println("Exception: " + e);
         }
     }//GEN-LAST:event_rentedCarsButtonActionPerformed
+
+    private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
+        LinkedList<String[]> rentals = controller.searchRentals(name);
+        LinkedList<String[]> returns = controller.searchRentals(name);
+        DefaultTableModel model=(DefaultTableModel)rentedCarsTable.getModel();
+        DefaultTableModel model2=(DefaultTableModel)returnedCarsTable.getModel();
+        for (String[] rental: rentals){
+            LinkedList<String[]> cars = controller.searchCars(rental[2]);
+            for (String[] car: cars){
+                model.addRow(new String[]{null, car[2], car[3], car[4], rental[0]});
+                model.addRow(new String[]{rental[2], car[2], car[3], car[4], rental[0], rental[1]});
+            }          
+        }
+    }//GEN-LAST:event_formFocusGained
 
     /**
      * @param args the command line arguments
