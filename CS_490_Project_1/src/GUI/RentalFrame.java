@@ -6,9 +6,10 @@
 package GUI;
 
 import BusinessLogic.Controller;
-import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Locale;
 import javax.swing.table.DefaultTableModel;
 
@@ -65,7 +66,6 @@ public class RentalFrame extends javax.swing.JFrame {
                     model.addRow(new String[]{null, car[2], car[3], car[4], rental[0]});
                 }
             }
-            tabs.setSelectedIndex(1); 
         }
         catch(Exception e){
             System.out.println("Exception: " + e);
@@ -96,7 +96,7 @@ public class RentalFrame extends javax.swing.JFrame {
         returnedCarsTable = new javax.swing.JTable();
         customerName = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         FCSearchButton.setText("Search");
         FCSearchButton.addActionListener(new java.awt.event.ActionListener() {
@@ -291,33 +291,46 @@ public class RentalFrame extends javax.swing.JFrame {
 
     private void FCRentSelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FCRentSelectedActionPerformed
         searchRentals();
+        tabs.setSelectedIndex(1); 
     }//GEN-LAST:event_FCRentSelectedActionPerformed
 
     private void rentedCarsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentedCarsButtonActionPerformed
         try{
             LinkedList<String[]> rentals = controller.searchRentals(name);
-            DefaultTableModel returnedModel=(DefaultTableModel)rentedCarsTable.getModel();
-            DefaultTableModel rentedModel=(DefaultTableModel)returnedCarsTable.getModel();
-            ReturnDateFrame frame=new ReturnDateFrame();
-            frame.setVisible(true);
-            rentedModel.setRowCount(0);
+            DefaultTableModel rentModel=(DefaultTableModel)rentedCarsTable.getModel();
+            DefaultTableModel returnModel=(DefaultTableModel)returnedCarsTable.getModel();
             int rowCount = rentedCarsTable.getRowCount();
+            List<Integer> selectedRows = new ArrayList<Integer>();
             for (int row = 0; row<rowCount; row++){
-                for (String[] rental: rentals){
-                    if ((Boolean)rentedCarsTable.getValueAt(row,0) != null && (Boolean)rentedCarsTable.getValueAt(row,0) != false){             
-                        
-                        LinkedList<String[]> cars = controller.searchCars(rental[2]);
-                        
-                        for (String[] car: cars){
-                            controller.returnRental(rental[2]);
-                            rentedModel.addRow(new String[]{rental[2], car[2], car[3], car[4], rental[0], rental[1]});
-                            
-                        }  
-                        returnedModel.removeRow(row);
+                if ((Boolean)rentedCarsTable.getValueAt(row,0) != null && (Boolean)rentedCarsTable.getValueAt(row,0) != false){             
+                    selectedRows.add(row);
+                }  
+            }
+            int row = 0;
+            for (String[] rental: rentals){
+                if (selectedRows.contains(row)){
+                    LinkedList<String[]> cars = controller.searchCars(rental[2]);   
+                    for (String[] car: cars){
+                        returnModel.addRow(new String[]{rental[2], car[2], car[3], car[4], rental[0], rental[1]});
                     }
                 }
-            }     
-            tabs.setSelectedIndex(2); 
+                row++;
+            }
+            row = rentedCarsTable.getRowCount()-1;
+            for (String[] rental: rentals){
+                if (selectedRows.contains(row)){
+                    rentModel.removeRow(row);
+                    controller.returnRental(rental[2]);
+                    /*
+                    LinkedList<String[]> cars = controller.searchCars(rental[2]);   
+                    for (String[] car: cars){
+                                                    
+                    }
+                    */
+                }
+                row--;
+            }
+            tabs.setSelectedIndex(2);
         }
         catch(Exception e){
             System.out.println("Exception: " + e);

@@ -31,7 +31,7 @@ public class ReturnDateFrame extends javax.swing.JFrame {
         returnDateText = new javax.swing.JTextField();
         submitButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         returnDateLabel.setText("Return Date:");
 
